@@ -6,93 +6,74 @@
  * @flow
  */
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>第一步</Text>
-              <Text style={styles.sectionDescription}>
-                编辑<Text style={styles.highlight}>App.js</Text> 以更改此
-                屏幕，然后回来查看您的编辑。
-              </Text>
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+import React, {Component} from 'react';
+import TabNavigator from 'react-native-tab-navigator';
+import {Platform, StyleSheet, Text, View, Image} from 'react-native';
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.black,
+  tabContent: {
+    flex: 1,
+    alignItems: 'center',
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.red,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    paddingStart: 12,
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#8194AA',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    lineHeight: 40,
-    fontWeight: '400',
-    color: '#8194AA',
-    marginBottom: 30,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  tabText: {
+    color: 'white',
+    margin: 50,
   },
 });
+export default class App extends Component<{}> {
+  state = {
+    selectedTab: 'home',
+  };
+  _renderContent = (color: string, pageText: string) => {
+    return (
+      <View style={[styles.tabContent, {backgroundColor: color}]}>
+        <Text style={styles.tabText}>{pageText}</Text>
+      </View>
+    );
+  };
 
-export default App;
+  render() {
+    return (
+      <TabNavigator>
+        <TabNavigator.Item
+          selected={this.state.selectedTab === 'home'}
+          title="首页"
+          renderIcon={() => (
+            <Image
+              style={{width: 25, height: 25}}
+              source={require('./image/home_gray.png')}
+            />
+          )}
+          renderSelectedIcon={() => (
+            <Image
+              style={{width: 25, height: 25}}
+              source={require('./image/home.png')}
+            />
+          )}
+          badgeText="1"
+          onPress={() => this.setState({selectedTab: 'home'})}>
+          {this._renderContent('#414A8C', '首页')}
+        </TabNavigator.Item>
+        <TabNavigator.Item
+          selected={this.state.selectedTab === 'profile'}
+          title="个人中心"
+          renderIcon={() => (
+            <Image
+              style={{width: 25, height: 25}}
+              source={require('./image/home_gray.png')}
+            />
+          )}
+          renderSelectedIcon={() => (
+            <Image
+              style={{width: 25, height: 25}}
+              source={require('./image/home.png')}
+            />
+          )}
+          badgeText="1"
+          onPress={() => this.setState({selectedTab: 'profile'})}>
+          {this._renderContent('#783E33', '个人中心')}
+        </TabNavigator.Item>
+      </TabNavigator>
+    );
+  }
+}
