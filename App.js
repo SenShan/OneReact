@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import TabNavigator from 'react-native-tab-navigator';
 import {Platform, StyleSheet, Text, View, Image} from 'react-native';
-
+import Lifecycle from './style/Lifecycle';
 const styles = StyleSheet.create({
   tabContent: {
     flex: 1,
@@ -28,6 +28,7 @@ export default class App extends Component<{}> {
     return (
       <View style={[styles.tabContent, {backgroundColor: color}]}>
         <Text style={styles.tabText}>{pageText}</Text>
+        <Lifecycle name="小麦" />
       </View>
     );
   };
