@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import TabNavigator from 'react-native-tab-navigator';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, ListView} from 'react-native';
 import Lifecycle from './style/Lifecycle';
 const styles = StyleSheet.create({
   tabContent: {
