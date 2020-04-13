@@ -384,4 +384,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Demo', () => Demo);
+// AppRegistry.registerComponent('Demo', () => Demo);
